@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniAI - Unified AI Interface</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <img src="assets/icons/logo.svg" alt="OmniAI Logo" class="logo">
+                    <h1>Omni<span>AI</span></h1>
+                </div>
+                <button class="new-chat-btn" id="newChatBtn">
+                    <i class="fas fa-plus"></i> New Chat
+                </button>
+            </div>
+            
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search history...">
+            </div>
+            
+            <div class="history-list" id="historyList">
+                <!-- History items will be added here dynamically -->
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">U</div>
+                    <div class="user-info">
+                        <span class="username">User</span>
+                        <span class="user-email">user@example.com</span>
+                    </div>
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="breadcrumbs">
+                    <span>All Models</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Current Session</span>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chat-container">
+                <div class="model-selector">
+                    <div class="model-tabs">
+                        <div class="model-tab active" data-model="all">
+                            <i class="fas fa-layer-group"></i>
+                            <span>All Models</span>
+                        </div>
+                        <div class="model-tab" data-model="chatgpt">
+                            <img src="assets/icons/chatgpt-icon.svg" alt="ChatGPT">
+                            <span>ChatGPT</span>
+                        </div>
+                        <div class="model-tab" data-model="deepseek">
+                            <img src="assets/icons/deepseek-icon.svg" alt="DeepSeek">
+                            <span>DeepSeek</span>
+                        </div>
+                        <div class="model-tab" data-model="gemini">
+                            <img src="assets/icons/gemini-icon.svg" alt="Gemini">
+                            <span>Gemini</span>
+                        </div>
+                        <div class="model-tab" data-model="claude">
+                            <img src="assets/icons/claude-icon.svg" alt="Claude">
+                            <span>Claude</span>
+                        </div>
+                    </div>
+                    
+                    <div class="model-options">
+                        <div class="option-group">
+                            <label>Temperature</label>
+                            <input type="range" min="0" max="100" value="50" class="slider">
+                        </div>
+                        <div class="option-group">
+                            <label>Max Tokens</label>
+                            <input type="number" value="1024" class="num-input">
+                        </div>
+                        <button class="advanced-btn">
+                            <i class="fas fa-cog"></i> Advanced
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chat-display" id="chatDisplay">
+                    <!-- Welcome message -->
+                    <div class="welcome-message">
+                        <img src="assets/icons/logo.svg" alt="OmniAI" class="welcome-logo">
+                        <h2>Welcome to OmniAI</h2>
+                        <p>Send a prompt to multiple AI models simultaneously and compare their responses.</p>
+                        <div class="quick-prompts">
+                            <button class="quick-prompt">Explain quantum computing</button>
+                            <button class="quick-prompt">Write a poem about AI</button>
+                            <button class="quick-prompt">Debug this code snippet</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <div class="input-tools">
+                        <button class="tool-btn" title="Attach File">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <button class="tool-btn" title="Record Audio">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                        <button class="tool-btn" title="Insert Code">
+                            <i class="fas fa-code"></i>
+                        </button>
+                        <div class="file-preview" id="filePreview"></div>
+                    </div>
+                    
+                    <div class="prompt-input">
+                        <textarea id="promptTextarea" placeholder="Ask anything to multiple AIs at once..."></textarea>
+                        <button id="sendButton" class="send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="model-checkboxes">
+                        <label class="model-checkbox active">
+                            <input type="checkbox" name="model" value="chatgpt" checked>
+                            <img src="assets/icons/chatgpt-icon.svg" alt="ChatGPT">
+                            <span>ChatGPT</span>
+                        </label>
+                        <label class="model-checkbox active">
+                            <input type="checkbox" name="model" value="deepseek" checked>
+                            <img src="assets/icons/deepseek-icon.svg" alt="DeepSeek">
+                            <span>DeepSeek</span>
+                        </label>
+                        <label class="model-checkbox active">
+                            <input type="checkbox" name="model" value="gemini" checked>
+                            <img src="assets/icons/gemini-icon.svg" alt="Gemini">
+                            <span>Gemini</span>
+                        </label>
+                        <label class="model-checkbox active">
+                            <input type="checkbox" name="model" value="claude" checked>
+                            <img src="assets/icons/claude-icon.svg" alt="Claude">
+                            <span>Claude</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
